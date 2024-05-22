@@ -1,5 +1,5 @@
 
-export class Filter {
+export class ItemFilter {
   language: string = "";
   sort: string = "";
   order: string = "";

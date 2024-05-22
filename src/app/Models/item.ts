@@ -9,7 +9,7 @@ export class Item {
   stargazers_count: number = 0;
   updated_at: any;
   html_url: string = '';
-  owner: any;
-  license: any;
+  owner = {};
+  license = {};
   topics = []
 }

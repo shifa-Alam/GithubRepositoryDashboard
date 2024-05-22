@@ -5,7 +5,6 @@ import { AppComponent } from './app.component';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { HttpClientModule } from '@angular/common/http';
-import { CardContainerComponent } from './card-container/card-container.component';
 import { GridContainerComponent } from './grid-container/grid-container.component';
 
 
@@ -43,19 +42,21 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatNativeDateModule } from '@angular/material/core';
 import { NavmenuComponent } from './navmenu/navmenu.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ListContainerComponent } from './list-container/list-container.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     DashboardComponent,
-    CardContainerComponent,
+  
     GridContainerComponent,
-    NavmenuComponent
+    NavmenuComponent,
+    ListContainerComponent
   ],
   imports: [
     BrowserModule,
-    // BrowserAnimationsModule,
+    BrowserAnimationsModule,
     AppRoutingModule,
     HttpClientModule,
    

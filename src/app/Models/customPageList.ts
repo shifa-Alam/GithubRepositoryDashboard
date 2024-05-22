@@ -1,7 +1,6 @@
-import { Item } from './Item';
+import { Item } from "./item";
 
-
-export class Data {
+export class CustomPageList {
   total_count: number = 0;
   incomplete_results: boolean = false;
   items: Item[] = [];

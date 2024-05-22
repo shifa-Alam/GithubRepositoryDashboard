@@ -1,21 +1,27 @@
-<!-- <mat-form-field>
-  <mat-label>Filter</mat-label>
-  <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Mia" #input>
-</mat-form-field>
- -->
-
-
 <div class="row">
   <div class="col-10">
     <mat-form-field class="example-full-width">
       <mat-label>Search Language</mat-label>
-      <input matInput (keyup)="onLanguageChange($event)"/>
+      <input matInput (keyup)="onLanguageChange($event)" [value]="filter.language"/>
     </mat-form-field>
   </div>
-  <div class="col-2"style="padding-top: 20px;text-align:end"><mat-slide-toggle (change)="swith($event)">Card View</mat-slide-toggle></div>
+  <div class="col-2" style="padding-top: 10px;text-align:end">
+    <button (click)="switch()" mat-icon-button color="primary" aria-label="Example icon button with a menu icon">
+      <mat-icon *ngIf="!isGridView">grid_view</mat-icon>
+      <mat-icon *ngIf="isGridView" >menu</mat-icon>
+    </button>
+  </div>
 </div>
 <mat-progress-bar mode="indeterminate" *ngIf="isLoading"></mat-progress-bar>
-<div >
-  <app-card-container *ngIf="isCardView &&data" [data]="data" (onPageChange)="onPageChange($event)" (onSort)="onSort($event)"></app-card-container>
-  <app-grid-container *ngIf="!isCardView" [data]="data" (onPageChange)="onPageChange($event)" (onSort)="onSort($event)"></app-grid-container>
+<div class="row">
+  <div class="col-12">
+    <app-grid-container *ngIf="isGridView &&customPageList" [customPageList]="customPageList" (onPageChange)="onPageChange($event)"
+      (onSort)="onSort($event)"></app-grid-container>
+
+  </div>
+  <div class="col-12">
+
+    <app-list-container *ngIf="!isGridView &&customPageList" [customPageList]="customPageList" (onPageChange)="onPageChange($event)"
+      (onSort)="onSort($event)"></app-list-container>
+  </div>
 </div>

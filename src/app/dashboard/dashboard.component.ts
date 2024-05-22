@@ -1,7 +1,8 @@
-import { AfterViewInit, Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { RepositoryService } from '../Services/repository.service';
-import { Data } from './Data';
-import { Filter } from './filter';
+
+import { ItemFilter } from '../Models/itemFilter';
+import { CustomPageList } from '../Models/customPageList';
 
 @Component({
   selector: 'app-dashboard',
@@ -10,23 +11,20 @@ import { Filter } from './filter';
 
 })
 export class DashboardComponent implements OnInit {
-  isCardView: boolean = false;
+  isGridView: boolean = false;
   isLoading: boolean = false;
-  data: Data = new Data();
-  filter: Filter = new Filter();
+  customPageList: CustomPageList = new CustomPageList();
+  filter: ItemFilter = new ItemFilter();
 
   constructor(private readonly repositoryService: RepositoryService) {
   }
-
-
   ngOnInit(): void {
     this.initFilter();
     this.loadData();
-
   }
   initFilter() {
     this.filter.page = 1;
-    this.filter.language = "java";
+    this.filter.language = "javascript";
     this.filter.sort = "stars";
     this.filter.order = "desc";
     this.filter.per_page = 50;
@@ -34,32 +32,34 @@ export class DashboardComponent implements OnInit {
   loadData() {
     this.isLoading = true;
     this.repositoryService.getRepositories(this.filter).subscribe({
-      next: (data: Data) => {
-        this.data = data;
-        this.data.page = this.filter.page;
-        this.data.per_page = this.filter.per_page;
+      next: (responsedData: CustomPageList) => {
+        this.customPageList = responsedData;
+        this.customPageList.page = this.filter.page;
+        this.customPageList.per_page = this.filter.per_page;
         this.isLoading = false;
       },
       error: (e) => {
         console.error(e);
         this.isLoading = false;
-        this.data = new Data();
+        this.customPageList = new CustomPageList();
       },
-
       complete() {
         // console.log("is completed");
-
-      },
+      }
     });
   }
-  swith(event: any) {
-    this.isCardView = event.checked;
-    // this.loadData();
+  switch() {
+    this.isGridView = !this.isGridView;
   }
   onLanguageChange(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.filter.language = filterValue.trim().toLowerCase();
-    this.loadData();
+    if(this.filter.language){
+
+    }else{
+      this.filter.language="javascript";
+    }
+    setTimeout(() => { this.loadData() }, 3000);
 
   }
   onPageChange(page: any) {
@@ -74,5 +74,4 @@ export class DashboardComponent implements OnInit {
     this.filter.order = sort.direction;
     this.loadData();
   }
- 
 }
