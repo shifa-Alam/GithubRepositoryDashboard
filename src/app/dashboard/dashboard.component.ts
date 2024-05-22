@@ -15,6 +15,7 @@ export class DashboardComponent implements OnInit {
   isLoading: boolean = false;
   customPageList: CustomPageList = new CustomPageList();
   filter: ItemFilter = new ItemFilter();
+  isAsc: boolean = false;
 
   constructor(private readonly repositoryService: RepositoryService) {
   }
@@ -51,13 +52,26 @@ export class DashboardComponent implements OnInit {
   switch() {
     this.isGridView = !this.isGridView;
   }
+  switchArrow() {
+    this.isAsc = !this.isAsc;
+    console.log(this.isAsc);
+    if (this.isAsc) {
+      this.filter.order = "asc";
+      console.log("asc");
+    } else {
+      this.filter.order = "desc";
+      console.log("desc");
+    }
+    this.filter.sort = "stargazers_count";
+    this.loadData();
+  }
   onLanguageChange(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.filter.language = filterValue.trim().toLowerCase();
-    if(this.filter.language){
+    if (this.filter.language) {
 
-    }else{
-      this.filter.language="javascript";
+    } else {
+      this.filter.language = "javascript";
     }
     setTimeout(() => { this.loadData() }, 3000);
 
@@ -69,7 +83,7 @@ export class DashboardComponent implements OnInit {
     this.loadData();
   }
   onSort(sort: any) {
-    // console.log("sort", sort);
+    console.log("sort", sort);
     this.filter.sort = sort.active;
     this.filter.order = sort.direction;
     this.loadData();

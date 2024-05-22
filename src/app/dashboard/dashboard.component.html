@@ -6,6 +6,11 @@
     </mat-form-field>
   </div>
   <div class="col-2" style="padding-top: 10px;text-align:end">
+    
+    <button *ngIf="isGridView"  (click)="switchArrow()" mat-icon-button color="primary" aria-label="Example icon button with a menu icon">
+      <mat-icon *ngIf="!isAsc">arrow_upward</mat-icon>
+      <mat-icon *ngIf="isAsc">arrow_downward </mat-icon>
+    </button>
     <button (click)="switch()" mat-icon-button color="primary" aria-label="Example icon button with a menu icon">
       <mat-icon *ngIf="!isGridView">grid_view</mat-icon>
       <mat-icon *ngIf="isGridView" >menu</mat-icon>
