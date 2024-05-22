@@ -1,13 +1,13 @@
 <div class="row">
-    <div class="col-4 customClass" *ngFor="let item of dataSource.filteredData">
+    <div class="col-3 customClass" *ngFor="let item of dataSource.filteredData">
         <mat-card class="example-card">
             <mat-card-header>
                 <!-- <div mat-card-avatar class="example-header-image"></div> -->
-                <mat-card-title> Star : {{item.stargazers_count}}</mat-card-title>
-                <mat-card-subtitle>Name : {{item.name}}</mat-card-subtitle>
+                <mat-card-title>  {{item.name}}</mat-card-title>
+                <mat-card-subtitle> {{item.stargazers_count}}</mat-card-subtitle>
             </mat-card-header>
             <mat-card-content>
-                <p> Desc : {{item.description}}</p>
+                <!-- <p> Desc : {{item.description}}</p> -->
 
                 <mat-divider></mat-divider>
             </mat-card-content>
@@ -17,5 +17,11 @@
             </mat-card-actions>
         </mat-card>
 
+    </div>
+</div>
+<div class="row">
+    <div class="col-12">
+        <mat-paginator [pageSizeOptions]="[5, 10, 25,50]" (page)="getPaginatedData($event)" aria-label="Select page" showFirstLastButtons></mat-paginator>
+   
     </div>
 </div>

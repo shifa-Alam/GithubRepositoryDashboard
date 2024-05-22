@@ -25,6 +25,12 @@ export class GridContainerComponent implements OnInit {
   ngOnInit(): void {
     this.dataSetup();
   }
+  ngAfterViewInit(): void {
+    console.log("ngAfterViewInit");
+    this.paginator.pageSize = this.customPageList.per_page;
+    this.paginator.length = this.customPageList.total_count;
+
+  }
   dataSetup() {
     this.dataSource = new MatTableDataSource(this.customPageList.items);
   }

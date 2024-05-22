@@ -27,7 +27,7 @@ export class DashboardComponent implements OnInit {
     this.filter.language = "javascript";
     this.filter.sort = "stars";
     this.filter.order = "desc";
-    this.filter.per_page = 50;
+    this.filter.per_page = 48;
   }
   loadData() {
     this.isLoading = true;
